@@ -1,3 +1,4 @@
+import joi from 'joi'
 import { ArtistsRepository } from '../../repository/artists/ArtistsRepository'
 import { Response, normalizationResponse } from '../../../shared/utils/response'
 import { IUseCase } from '../../../shared/utils/use_cases'
@@ -24,9 +25,19 @@ class CreateArtist implements IUseCase<T, K> {
     async execute({ name, email, password }: T): Promise<Response<K>> {
         try {
 
-            if (!name || !email || !password) {
+            const schemaValidate = joi.object({
+                name: joi.string().required(),
+                email: joi.string().email().required(),
+                password: joi.string().required()
+            })
+            const { error } = schemaValidate.validate({ name, email, password })
+            if (error) {
                 return normalizationResponse.notFound('Artist settings')
             }
+
+            // if (!name || !email || !password) {
+            //     return normalizationResponse.notFound('Artist settings')
+            // }
 
             const artistEmail = await this.artistsRepository
                 .findByEmail({ email })

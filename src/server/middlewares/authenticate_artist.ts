@@ -29,6 +29,15 @@ const authenticate = async (
                 return Promise.reject(reply.status(401).send(normalizationResponse.unauthorized()))
             }
 
+            if (typeof req.body === 'object' && req.body !== null) {
+                req.body = {
+                    ...req.body,
+                    artistId: decoded.user_id
+                };
+            } else {
+                req.body = { artistId: decoded.user_id };
+            }
+
             return Promise.resolve()
         }
     } catch (e) {

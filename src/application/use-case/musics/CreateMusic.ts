@@ -25,7 +25,7 @@ class CreateMusic implements IUseCase<T, K> {
     async execute({ title, description, artistId, }: T): Promise<Response<K>> {
         try {
 
-            if (!title || !description || !artistId) {
+            if (!title || !description) {
                 return normalizationResponse.notFound('Music settings')
             }
 

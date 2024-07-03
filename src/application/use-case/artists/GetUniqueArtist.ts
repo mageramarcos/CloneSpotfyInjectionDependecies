@@ -1,3 +1,4 @@
+import joi from 'joi'
 import { ArtistsRepository } from '../../repository/artists/ArtistsRepository'
 import { Response, normalizationResponse } from '../../../shared/utils/response'
 import { IUseCase } from '../../../shared/utils/use_cases'
@@ -18,9 +19,19 @@ class GetUniqueArtist implements IUseCase<T, K> {
     async execute({ id }: T): Promise<Response<K>> {
         try {
 
-            if (!id) {
+            const schemaValidate = joi.object({
+                id: joi.string().required()
+            })
+
+            const { error } = schemaValidate.validate({ id })
+            if (error) {
                 return normalizationResponse.notFound('Artist')
             }
+
+
+            // if (!id) {
+            //     return normalizationResponse.notFound('Artist')
+            // }
 
             const getUniqueArtist = await this.artistsRepository.findUnique({ id })
 
