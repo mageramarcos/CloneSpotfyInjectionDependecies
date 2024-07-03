@@ -1,7 +1,7 @@
 import { drizzleClient } from 'src/db/drizzle'
 import { Artists } from 'src/db/schema'
 import { IArtists } from 'src/application/entities/IArtists'
-import { CreateParams, CreateResponse, ArtistsRepository, FindManyParams, FindManyResponse, FindUniqueParams, FindUniqueResponse, UpdateParams, UpdateResponse, DeleteParams, FindByEmailParams, FindByEmailResponse } from "../../artists/ArtistsRepository";
+import { CreateParams, CreateResponse, ArtistsRepository, FindManyParams, FindManyResponse, FindUniqueParams, FindUniqueResponse, UpdateParams, UpdateResponse, DeleteParams, FindByEmailParams, FindByEmailResponse } from "../artists/ArtistsRepository";
 import { eq } from 'drizzle-orm'
 
 class DrizzleArtistsRepository implements ArtistsRepository {

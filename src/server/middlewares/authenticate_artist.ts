@@ -1,7 +1,8 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { normalizationResponse } from '../../shared/utils/response'
 import { verifyToken } from '../../shared/utils/jwt'
-import { DrizzleArtistsRepository } from 'src/application/repository/implementations/artists/DrizzleArtistsRepository'
+import { DrizzleArtistsRepository } from 'src/application/repository/implementations/DrizzleArtistsRepository'
+
 
 interface FindUniqueParams {
     id: string;

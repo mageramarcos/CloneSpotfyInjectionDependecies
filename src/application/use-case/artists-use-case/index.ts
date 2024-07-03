@@ -1,5 +1,5 @@
 import { UseCaseHandler } from "src/shared/utils/use_cases"
-import { DrizzleArtistsRepository } from "../../repository/implementations/artists/DrizzleArtistsRepository"
+import { DrizzleArtistsRepository } from "src/application/repository/implementations/DrizzleArtistsRepository"
 import { CreateArtist } from "./CreateArtist"
 import { ListArtists } from "./ListArtists"
 import { GetUniqueArtist } from "./GetUniqueArtist"

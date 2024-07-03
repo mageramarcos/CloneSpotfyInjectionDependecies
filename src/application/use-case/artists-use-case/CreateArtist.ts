@@ -28,6 +28,14 @@ class CreateArtist implements IUseCase<T, K> {
                 return normalizationResponse.notFound('Artist settings')
             }
 
+            const artistEmail = await this.artistsRepository
+                .findByEmail({ email })
+
+            if (artistEmail) {
+                return normalizationResponse.conflict('Email already exists')
+
+            }
+
             const passwordEncrypted = await bcrypt.hash(password, 10)
 
             const createArtist = await this.artistsRepository.create({
