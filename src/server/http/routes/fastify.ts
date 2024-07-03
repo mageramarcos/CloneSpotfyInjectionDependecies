@@ -1,9 +1,9 @@
 import { FastifyInstance, FastifyPluginOptions } from 'fastify';
 import { applyUseCase } from "../../middlewares/apply_use_case"
-import { createArtist, deleteArtist, getUniqueArtist, listArtists, updateArtist, loginArtist } from "src/application/use-case/artists-use-case"
+import { createArtist, deleteArtist, getUniqueArtist, listArtists, updateArtist, loginArtist } from "src/application/use-case/artists"
 import { authenticate } from "src/server/middlewares/authenticate_artist"
-import { createMusic, deleteMusic, getUniqueMusic, listMusics, updateMusic } from 'src/application/use-case/musics-use-case';
-import { createPlaylist } from 'src/application/use-case/playlists-use-case';
+import { createMusic, deleteMusic, getUniqueMusic, listMusics, updateMusic } from 'src/application/use-case/musics';
+import { createPlaylist, deletePlaylist, getUniquePlaylist, listPlaylist, updatePlaylist } from 'src/application/use-case/playlists';
 
 export async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
 
@@ -32,6 +32,12 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
 
         // Playlists
         instance.post('/playlists', applyUseCase(createPlaylist))
+        instance.get('/playlists', applyUseCase(listPlaylist))
+        instance.get('/playlists/:id', applyUseCase(getUniquePlaylist))
+        instance.patch('/playlists/:id', applyUseCase(updatePlaylist, { separate_body: true, param_key: 'id' }))
+        instance.delete('/playlists/:id', applyUseCase(deletePlaylist))
+
+
 
     })
 }

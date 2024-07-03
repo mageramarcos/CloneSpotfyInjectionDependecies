@@ -28,7 +28,7 @@ class DeleteMusic implements IUseCase<T, K> {
             const findByArtistId = await this.musicsRepository.findByArtistId({ artistId })
 
             if (!findByArtistId) {
-                return normalizationResponse.conflict('Does not belong to the artist')
+                return normalizationResponse.conflict('Music does not belong to the artist')
 
             }
 

@@ -10,12 +10,14 @@ type CreatePlaylistRequest = {
     description: string
     artistId: string
     musicIds: string[] | null
-
 }
+
 type T = CreatePlaylistRequest
 type CreatePlaylistResponse = {
-    playlist: IPlaylists
+    playlist: IPlaylists,
+    message?: string
 }
+
 type K = CreatePlaylistResponse
 
 class CreatePlaylist implements IUseCase<T, K> {
@@ -27,7 +29,7 @@ class CreatePlaylist implements IUseCase<T, K> {
 
     async execute({ title, description, artistId, musicIds }: T): Promise<Response<K>> {
         try {
-            if (!title || !description || !artistId || !artistId || !musicIds) {
+            if (!title || !description || !artistId) {
                 return normalizationResponse.notFound('Playlist settings')
             }
 
@@ -39,35 +41,42 @@ class CreatePlaylist implements IUseCase<T, K> {
                 return normalizationResponse.conflict('Artist does not exist')
             }
 
-            const findUniqueMusic = await this.musicsRepository.findUnique({
-                id:
-                    musicIds[0]
-            })
+            let validMusicIds: string[] = []
+            let invalidMusicIds: string[] = []
 
+            if (musicIds !== null) {
+                for (const musicId of musicIds) {
+                    const findUniqueMusic = await this.musicsRepository.findUnique({
+                        id: musicId
+                    })
 
-            if (!findUniqueMusic) {
-                return normalizationResponse.conflict('Music not exist')
+                    if (findUniqueMusic) {
+                        validMusicIds.push(musicId)
+                    } else {
+                        invalidMusicIds.push(musicId)
+                    }
+                }
             }
-
 
             const createPlaylist = await this.playlistsRepository.create({
                 data: {
                     title,
                     description,
                     artistId,
-                    musicIds
+                    musicIds: validMusicIds
                 }
             })
 
-            return normalizationResponse.ok({ playlist: createPlaylist })
+            let message = ''
+            if (invalidMusicIds.length > 0) {
+                message = `The following music IDs do not exist and were not added: ${invalidMusicIds.join(', ')}.`
+            }
+
+            return normalizationResponse.ok({ playlist: createPlaylist, message })
         } catch (error) {
             return normalizationResponse.serverError(error.message)
         }
     }
-
-
 }
 
-export {
-    CreatePlaylist
-}
+export { CreatePlaylist }

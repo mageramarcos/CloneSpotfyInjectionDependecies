@@ -1,11 +1,11 @@
 import { drizzleClient } from 'src/db/drizzle'
 import { Playlists } from 'src/db/schema';
-import { IMusics } from 'src/application/entities/IMusics';
-import { CreateParams, CreateResponse, PlaylistsRepository } from "../playlists/PlaylistsRepository";
+import { IPlaylists } from 'src/application/entities/IPlaylists';
+import { CreateParams, CreateResponse, PlaylistsRepository, FindManyParams, FindManyResponse, FindUniqueParams, FindUniqueResponse, UpdateParams, UpdateResponse, DeleteParams, FindByArtistIdParams, FindByArtistIdResponse } from "../playlists/PlaylistsRepository";
 import { eq } from 'drizzle-orm'
 
 
-// , FindManyParams, FindManyResponse, FindUniqueParams, FindUniqueResponse, UpdateParams, UpdateResponse, DeleteParams, FindByArtistIdParams, FindByArtistIdResponse 
+
 
 
 class DrizzlePlaylistsRepository implements PlaylistsRepository {
@@ -26,50 +26,50 @@ class DrizzlePlaylistsRepository implements PlaylistsRepository {
             .then(([playlists]) => playlists)
     }
 
-    // async findMany({ }: FindManyParams): Promise<FindManyResponse> {
+    async findMany({ }: FindManyParams): Promise<FindManyResponse> {
 
-    //     return await drizzleClient
-    //         .select()
-    //         .from(Musics)
-    // }
+        return await drizzleClient
+            .select()
+            .from(Playlists)
+    }
 
-    // async findUnique({ id }: FindUniqueParams): Promise<FindUniqueResponse> {
-    //     return await drizzleClient
-    //         .select()
-    //         .from(Musics)
-    //         .where(eq(Musics.id, id))
-    //         .then(([musics]) => musics)
-    // }
+    async findUnique({ id }: FindUniqueParams): Promise<FindUniqueResponse> {
+        return await drizzleClient
+            .select()
+            .from(Playlists)
+            .where(eq(Playlists.id, id))
+            .then(([playlists]) => playlists)
+    }
 
-    // async update({ id, data }: UpdateParams): Promise<UpdateResponse> {
-    //     return await drizzleClient
-    //         .update(Musics)
-    //         .set({
-    //             ...data
-    //         })
-    //         .where(eq(Musics.id, id))
-    //         .returning()
-    //         .then(([musics]) => musics)
-    // }
+    async update({ id, data }: UpdateParams): Promise<UpdateResponse> {
+        return await drizzleClient
+            .update(Playlists)
+            .set({
+                ...data
+            })
+            .where(eq(Playlists.id, id))
+            .returning()
+            .then(([playlists]) => playlists)
+    }
 
-    // async delete({ id }: DeleteParams): Promise<IMusics> {
+    async delete({ id }: DeleteParams): Promise<IPlaylists> {
 
-    //     return await drizzleClient
-    //         .delete(Musics)
-    //         .where(eq(Musics.id, id))
-    //         .returning()
-    //         .then(([musics]) => musics)
+        return await drizzleClient
+            .delete(Playlists)
+            .where(eq(Playlists.id, id))
+            .returning()
+            .then(([playlists]) => playlists)
 
-    // }
+    }
 
-    // async findByArtistId({ artistId }: FindByArtistIdParams): Promise<FindByArtistIdResponse> {
+    async findByArtistId({ artistId }: FindByArtistIdParams): Promise<FindByArtistIdResponse> {
 
-    //     return await drizzleClient
-    //         .select()
-    //         .from(Musics)
-    //         .where(eq(Musics.artistId, artistId))
-    //         .then(([musics]) => musics)
-    // }
+        return await drizzleClient
+            .select()
+            .from(Playlists)
+            .where(eq(Playlists.artistId, artistId))
+            .then(([playlists]) => playlists)
+    }
 
 
 }

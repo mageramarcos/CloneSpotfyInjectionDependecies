@@ -11,54 +11,54 @@ type CreateParams = {
 
 type CreateResponse = IPlaylists
 
-// // Find many
-// type FindManyParams = {}
+// Find many
+type FindManyParams = {}
 
-// type FindManyResponse = IMusics[]
-
-
-// // Find unique
-// type FindUniqueParams = {
-//     id: string,
-// }
-
-// type FindUniqueResponse = IMusics | null
-
-// // // Update
-// type UpdateParams = {
-//     id: string
-//     data: Omit<IMusics,
-//         | 'id'
-//         | 'created_at'
-//         | 'updated_at'
-//     >
-// }
-
-// type UpdateResponse = IMusics
+type FindManyResponse = IPlaylists[]
 
 
+// Find unique
+type FindUniqueParams = {
+    id: string,
+}
 
-// // Delete
-// type DeleteParams = {
-//     id: string
-// }
+type FindUniqueResponse = IPlaylists | null
 
-// // Find by ArtistId
-// type FindByArtistIdParams = {
-//     artistId: string
-// }
+// // Update
+type UpdateParams = {
+    id: string
+    data: Omit<IPlaylists,
+        | 'id'
+        | 'created_at'
+        | 'updated_at'
+    >
+}
 
-// type FindByArtistIdResponse = IMusics | null
+type UpdateResponse = IPlaylists
+
+
+
+// Delete
+type DeleteParams = {
+    id: string
+}
+
+// Find by ArtistId
+type FindByArtistIdParams = {
+    artistId: string
+}
+
+type FindByArtistIdResponse = IPlaylists | null
 
 
 
 interface PlaylistsRepository {
     create(params: CreateParams): Promise<CreateResponse>
-    // findMany(params: FindManyParams): Promise<FindManyResponse>
-    // findUnique(params: FindUniqueParams): Promise<FindUniqueResponse>
-    // update(params: UpdateParams): Promise<UpdateResponse>
-    // delete(params: DeleteParams): Promise<IMusics>
-    // findByArtistId(params: FindByArtistIdParams): Promise<FindByArtistIdResponse>
+    findMany(params: FindManyParams): Promise<FindManyResponse>
+    findUnique(params: FindUniqueParams): Promise<FindUniqueResponse>
+    update(params: UpdateParams): Promise<UpdateResponse>
+    delete(params: DeleteParams): Promise<IPlaylists>
+    findByArtistId(params: FindByArtistIdParams): Promise<FindByArtistIdResponse>
 
 
 }
@@ -67,14 +67,14 @@ export {
     PlaylistsRepository,
     CreateParams,
     CreateResponse,
-    // FindManyParams,
-    // FindManyResponse,
-    // FindUniqueParams,
-    // FindUniqueResponse,
-    // UpdateParams,
-    // UpdateResponse,
-    // DeleteParams,
-    // FindByArtistIdParams,
-    // FindByArtistIdResponse
+    FindManyParams,
+    FindManyResponse,
+    FindUniqueParams,
+    FindUniqueResponse,
+    UpdateParams,
+    UpdateResponse,
+    DeleteParams,
+    FindByArtistIdParams,
+    FindByArtistIdResponse
 }
 
