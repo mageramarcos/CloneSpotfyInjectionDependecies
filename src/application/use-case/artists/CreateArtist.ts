@@ -5,13 +5,10 @@ import { IUseCase } from '../../../shared/utils/use_cases'
 import { IArtists } from '../../entities/IArtists'
 import bcrypt from 'bcrypt'
 
-
-
 type CreateArtistRequest = {
     name: string
     email: string
     password: string
-
 }
 type T = CreateArtistRequest
 type CreateArtistResponse = {
@@ -63,7 +60,6 @@ class CreateArtist implements IUseCase<T, K> {
             return normalizationResponse.serverError(error.message)
         }
     }
-
 }
 
 export {

@@ -5,8 +5,6 @@ interface IArtists {
     password: string
     createdAt?: Date
     updatedAt?: Date
-
-
 }
 
 export {

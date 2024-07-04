@@ -45,4 +45,6 @@ const applyUseCase = (
     }
 }
 
-export { applyUseCase }
+export {
+    applyUseCase
+}

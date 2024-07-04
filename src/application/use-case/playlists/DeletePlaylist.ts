@@ -3,7 +3,6 @@ import { PlaylistsRepository } from 'src/application/repository/playlists/Playli
 import { Response, normalizationResponse } from '../../../shared/utils/response'
 import { IUseCase } from '../../../shared/utils/use_cases'
 
-
 type DeletePlaylistRequest = {
     id: string
     artistId: string
@@ -39,14 +38,11 @@ class DeletePlaylist implements IUseCase<T, K> {
                 return normalizationResponse.notFound('Playlist')
             }
 
-
             return normalizationResponse.ok({ message: "Successfully Deleted" })
         } catch (error) {
             return normalizationResponse.serverError(error.message)
         }
     }
-
-
 }
 
 export {

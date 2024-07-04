@@ -28,7 +28,6 @@ class GetUniqueArtist implements IUseCase<T, K> {
                 return normalizationResponse.notFound('Artist')
             }
 
-
             // if (!id) {
             //     return normalizationResponse.notFound('Artist')
             // }
@@ -38,8 +37,6 @@ class GetUniqueArtist implements IUseCase<T, K> {
             if (!getUniqueArtist) {
                 return normalizationResponse.notFound('Artist')
             }
-
-
 
             return normalizationResponse.ok({ artist: getUniqueArtist })
         } catch (error) {

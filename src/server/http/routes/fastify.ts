@@ -7,12 +7,10 @@ import { createPlaylist, deletePlaylist, getUniquePlaylist, listPlaylist, update
 
 export async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
 
-
     // Artists
 
     fastify.post('/login', applyUseCase(loginArtist))
     fastify.post('/artists', applyUseCase(createArtist))
-
 
     fastify.register(async (instance, opts) => {
         instance.addHook('preHandler', authenticate)
@@ -36,8 +34,6 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
         instance.get('/playlists/:id', applyUseCase(getUniquePlaylist))
         instance.patch('/playlists/:id', applyUseCase(updatePlaylist, { separate_body: true, param_key: 'id' }))
         instance.delete('/playlists/:id', applyUseCase(deletePlaylist))
-
-
 
     })
 }

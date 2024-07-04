@@ -38,11 +38,9 @@ class UpdatePlaylist implements IUseCase<T, K> {
                 id
             })
 
-
             if (!findUniquePlaylist) {
                 return normalizationResponse.notFound('Playlist not found')
             }
-
 
             const findUniqueArtist = await this.artistsRepository.findUnique({
                 id: data.artistId
@@ -87,7 +85,6 @@ class UpdatePlaylist implements IUseCase<T, K> {
             return normalizationResponse.serverError(error.message)
         }
     }
-
 }
 
 export {

@@ -69,8 +69,6 @@ class DrizzleArtistsRepository implements ArtistsRepository {
             .where(eq(Artists.email, email))
             .then(([artists]) => artists)
     }
-
-
 }
 
 export {

@@ -3,13 +3,12 @@ import { Response, normalizationResponse } from '../../../shared/utils/response'
 import { IUseCase } from '../../../shared/utils/use_cases'
 import { IPlaylists } from 'src/application/entities/IPlaylists'
 
-
 type GetUniquePlaylistRequest = {
     id: string
 }
 type T = GetUniquePlaylistRequest
 type GetUniquePlaylistResponse = {
-    playlist: IPlaylists | null
+    playlist: IPlaylists | null | {}
 }
 type K = GetUniquePlaylistResponse
 
@@ -21,7 +20,6 @@ class GetUniquePlaylist implements IUseCase<T, K> {
 
             if (!id) {
                 return normalizationResponse.notFound('Playlist settings')
-
             }
 
             const getUniquePlaylist = await this.playlistsRepository.findUnique({ id })
@@ -35,8 +33,6 @@ class GetUniquePlaylist implements IUseCase<T, K> {
             return normalizationResponse.serverError(error.message)
         }
     }
-
-
 }
 
 export {

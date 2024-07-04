@@ -56,7 +56,6 @@ class UpdateMusic implements IUseCase<T, K> {
             return normalizationResponse.serverError(error.message)
         }
     }
-
 }
 
 export {

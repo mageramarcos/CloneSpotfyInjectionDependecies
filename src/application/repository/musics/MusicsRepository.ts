@@ -16,7 +16,6 @@ type FindManyParams = {}
 
 type FindManyResponse = IMusics[]
 
-
 // Find unique
 type FindUniqueParams = {
     id: string,
@@ -36,8 +35,6 @@ type UpdateParams = {
 
 type UpdateResponse = IMusics
 
-
-
 // Delete
 type DeleteParams = {
     id: string
@@ -50,8 +47,6 @@ type FindByArtistIdParams = {
 
 type FindByArtistIdResponse = IMusics | null
 
-
-
 interface MusicsRepository {
     create(params: CreateParams): Promise<CreateResponse>
     findMany(params: FindManyParams): Promise<FindManyResponse>
@@ -59,8 +54,6 @@ interface MusicsRepository {
     update(params: UpdateParams): Promise<UpdateResponse>
     delete(params: DeleteParams): Promise<IMusics>
     findByArtistId(params: FindByArtistIdParams): Promise<FindByArtistIdResponse>
-
-
 }
 
 export {
@@ -77,4 +70,3 @@ export {
     FindByArtistIdParams,
     FindByArtistIdResponse
 }
-

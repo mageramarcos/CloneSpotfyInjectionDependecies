@@ -2,7 +2,6 @@ import Fastify from 'fastify'
 import cors from '@fastify/cors'
 import { routes } from './server/http/routes/fastify'
 
-
 const app = Fastify({ logger: true })
 
 app.setErrorHandler((error, request, reply) => {

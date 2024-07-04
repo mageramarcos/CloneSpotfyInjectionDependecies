@@ -6,7 +6,6 @@ import { IUseCase } from '../../../shared/utils/use_cases'
 type DeleteMusicRequest = {
     id: string
     artistId: string
-
 }
 type T = DeleteMusicRequest
 type DeleteMusicResponse = {
@@ -29,7 +28,6 @@ class DeleteMusic implements IUseCase<T, K> {
 
             if (!findByArtistId) {
                 return normalizationResponse.conflict('Music does not belong to the artist')
-
             }
 
             const deleteMusic = await this.musicsRepository.delete({

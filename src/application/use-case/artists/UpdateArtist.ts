@@ -44,7 +44,6 @@ class UpdateArtist implements IUseCase<T, K> {
             return normalizationResponse.serverError(error.message)
         }
     }
-
 }
 
 export {

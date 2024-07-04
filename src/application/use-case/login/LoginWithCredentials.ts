@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt'
-
 import { ArtistsRepository } from '../../repository/artists/ArtistsRepository'
 import { Response, normalizationResponse } from '../../../shared/utils/response'
 import { IUseCase } from '../../../shared/utils/use_cases'
@@ -8,7 +7,6 @@ import { ITokens, generateAppTokens } from '../../../shared/utils/jwt'
 type LoginWithCredentialsRequest = {
     email: string
     password: string
-
 }
 type T = LoginWithCredentialsRequest
 type LoginWithCredentialsResponse = ITokens
@@ -22,7 +20,6 @@ class LoginWithCredentials implements IUseCase<T, K> {
     async execute({ email, password }: T): Promise<Response<K>> {
         try {
 
-
             const user = await this.usersRepository
                 .findByEmail({ email })
 
@@ -32,21 +29,19 @@ class LoginWithCredentials implements IUseCase<T, K> {
                 if (passwordMatch) {
                     const tokens = generateAppTokens({
                         user_id: user.id
-
                     })
 
                     return normalizationResponse.ok(tokens)
-
                 }
             }
-
 
             return normalizationResponse.unauthorized()
         } catch (error) {
             return normalizationResponse.serverError(error.message)
         }
     }
-
 }
 
-export { LoginWithCredentials }
+export {
+    LoginWithCredentials
+}

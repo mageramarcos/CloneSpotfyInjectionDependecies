@@ -4,10 +4,6 @@ import { IMusics } from 'src/application/entities/IMusics';
 import { CreateParams, CreateResponse, MusicsRepository, FindManyParams, FindManyResponse, FindUniqueParams, FindUniqueResponse, UpdateParams, UpdateResponse, DeleteParams, FindByArtistIdParams, FindByArtistIdResponse } from "../musics/MusicsRepository";
 import { eq } from 'drizzle-orm'
 
-// , FindByEmailParams, FindByEmailResponse
-
-
-
 class DrizzleMusicsRepository implements MusicsRepository {
 
     async create({ data }: CreateParams): Promise<CreateResponse> {
@@ -69,8 +65,6 @@ class DrizzleMusicsRepository implements MusicsRepository {
             .where(eq(Musics.artistId, artistId))
             .then(([musics]) => musics)
     }
-
-
 }
 
 export {

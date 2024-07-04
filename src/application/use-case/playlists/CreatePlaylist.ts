@@ -79,7 +79,6 @@ class CreatePlaylist implements IUseCase<T, K> {
                 });
             }
 
-
             return normalizationResponse.ok({ playlist: createPlaylist, message })
         } catch (error) {
             return normalizationResponse.serverError(error.message)
@@ -87,4 +86,6 @@ class CreatePlaylist implements IUseCase<T, K> {
     }
 }
 
-export { CreatePlaylist }
+export {
+    CreatePlaylist
+}

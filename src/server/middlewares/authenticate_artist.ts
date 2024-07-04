@@ -3,7 +3,6 @@ import { normalizationResponse } from '../../shared/utils/response'
 import { verifyToken } from '../../shared/utils/jwt'
 import { DrizzleArtistsRepository } from 'src/application/repository/implementations/DrizzleArtistsRepository'
 
-
 interface FindUniqueParams {
     id: string
 }
@@ -49,4 +48,6 @@ const authenticate = async (
     return Promise.reject(reply.status(401).send(normalizationResponse.unauthorized()))
 }
 
-export { authenticate }
+export {
+    authenticate
+}

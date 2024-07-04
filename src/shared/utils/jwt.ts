@@ -7,9 +7,7 @@ export interface ITokens {
 
 export interface IGenerateAppTokens {
     user_id: string
-
 }
-
 
 export const generateAppTokens = ({
     user_id
@@ -20,11 +18,8 @@ export const generateAppTokens = ({
         process.env.AUTH_ACCESS_SECRET || '',
         { expiresIn: process.env.AUTH_ACCESS_EXPIRES }
     )
-
     return { token }
 }
-
-
 
 export const verifyToken = (bearerToken: string) => {
     return jwt.verify(bearerToken, process.env.AUTH_ACCESS_SECRET || '') as IGenerateAppTokens

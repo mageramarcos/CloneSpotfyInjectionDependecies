@@ -35,8 +35,6 @@ const deleteArtist = () => {
 const loginArtist = () => {
     const artistsRepository = new DrizzleArtistsRepository()
     return new UseCaseHandler(new LoginWithCredentials(artistsRepository))
-
-
 }
 
 export {

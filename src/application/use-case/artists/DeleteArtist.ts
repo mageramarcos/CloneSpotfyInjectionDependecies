@@ -23,7 +23,6 @@ class DeleteArtist implements IUseCase<T, K> {
 
             const deleteArtist = await this.artistsRepository.delete({ id })
 
-
             if (!deleteArtist) {
                 return normalizationResponse.notFound('Artist')
             }

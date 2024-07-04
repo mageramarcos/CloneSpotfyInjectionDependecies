@@ -1,12 +1,8 @@
 import { drizzleClient } from 'src/db/drizzle'
-import { Playlists, PlaylistMusics } from 'src/db/schema';
+import { Playlists, PlaylistMusics, Artists, Musics } from 'src/db/schema';
 import { IPlaylists } from 'src/application/entities/IPlaylists';
 import { CreateParams, CreateResponse, PlaylistsRepository, FindManyParams, FindManyResponse, FindUniqueParams, FindUniqueResponse, UpdateParams, UpdateResponse, DeleteParams, FindByArtistIdParams, FindByArtistIdResponse, AddPlaylistMusicsParams, AddPlaylistMusicsResponse } from "../playlists/PlaylistsRepository";
 import { eq } from 'drizzle-orm'
-
-
-
-
 
 class DrizzlePlaylistsRepository implements PlaylistsRepository {
 
@@ -38,7 +34,10 @@ class DrizzlePlaylistsRepository implements PlaylistsRepository {
             .select()
             .from(Playlists)
             .where(eq(Playlists.id, id))
-            .then(([playlists]) => playlists)
+            .innerJoin(Artists, eq(Playlists.artistId, Artists.id))
+            .innerJoin(PlaylistMusics, eq(Playlists.id, PlaylistMusics.playlistId))
+            .innerJoin(Musics, eq(PlaylistMusics.musicId, Musics.id))
+            .then(([playlistMusic]) => ({ playlistMusic }));
     }
 
     async update({ id, data }: UpdateParams): Promise<UpdateResponse> {
@@ -83,9 +82,6 @@ class DrizzlePlaylistsRepository implements PlaylistsRepository {
             .returning()
             .then(([playlistMusics]) => playlistMusics)
     }
-
-
-
 }
 
 export {

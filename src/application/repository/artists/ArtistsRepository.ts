@@ -36,8 +36,6 @@ type UpdateParams = {
 
 type UpdateResponse = IArtists
 
-
-
 // Delete
 type DeleteParams = {
     id: string
@@ -50,8 +48,6 @@ type FindByEmailParams = {
 
 type FindByEmailResponse = IArtists | null
 
-
-
 interface ArtistsRepository {
     create(params: CreateParams): Promise<CreateResponse>
     findMany(params: FindManyParams): Promise<FindManyResponse>
@@ -59,8 +55,6 @@ interface ArtistsRepository {
     update(params: UpdateParams): Promise<UpdateResponse>
     delete(params: DeleteParams): Promise<IArtists>
     findByEmail(params: FindByEmailParams): Promise<FindByEmailResponse>
-
-
 }
 
 export {
@@ -77,4 +71,3 @@ export {
     FindByEmailParams,
     FindByEmailResponse
 }
-

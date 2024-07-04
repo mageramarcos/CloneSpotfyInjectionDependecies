@@ -17,15 +17,14 @@ type FindManyParams = {}
 
 type FindManyResponse = IPlaylists[]
 
-
 // Find unique
 type FindUniqueParams = {
     id: string,
 }
 
-type FindUniqueResponse = IPlaylists | null
+type FindUniqueResponse = IPlaylists | null | {}
 
-// // Update
+// Update
 type UpdateParams = {
     id: string
     data: Omit<IPlaylists,
@@ -37,8 +36,6 @@ type UpdateParams = {
 
 type UpdateResponse = IPlaylists
 
-
-
 // Delete
 type DeleteParams = {
     id: string
@@ -49,20 +46,15 @@ type FindByArtistIdParams = {
     artistId: string
 }
 
-// Add PlaylistMusics References
+type FindByArtistIdResponse = IPlaylists | null
 
+// Add PlaylistMusics References
 type AddPlaylistMusicsParams = {
     playlistId: string
     musicId: string
 }
 
 type AddPlaylistMusicsResponse = IPlaylistMusics | null
-
-
-
-type FindByArtistIdResponse = IPlaylists | null
-
-
 
 interface PlaylistsRepository {
     create(params: CreateParams): Promise<CreateResponse>
@@ -72,7 +64,6 @@ interface PlaylistsRepository {
     delete(params: DeleteParams): Promise<IPlaylists>
     findByArtistId(params: FindByArtistIdParams): Promise<FindByArtistIdResponse>
     addPlaylistMusics(params: AddPlaylistMusicsParams): Promise<AddPlaylistMusicsResponse>
-
 }
 
 export {
@@ -91,4 +82,3 @@ export {
     AddPlaylistMusicsParams,
     AddPlaylistMusicsResponse
 }
-

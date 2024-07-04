@@ -3,7 +3,6 @@ import { Response, normalizationResponse } from '../../../shared/utils/response'
 import { IUseCase } from '../../../shared/utils/use_cases'
 import { IMusics } from 'src/application/entities/IMusics'
 
-
 type ListMusicRequest = {
 
 }
