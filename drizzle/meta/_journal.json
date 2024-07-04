@@ -15,6 +15,13 @@
       "when": 1719929792797,
       "tag": "0001_cold_clea",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1720095495937,
+      "tag": "0002_wooden_mentor",
+      "breakpoints": true
     }
   ]
 }

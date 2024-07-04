@@ -1,4 +1,5 @@
 import { IPlaylists } from "src/application/entities/IPlaylists"
+import { IPlaylistMusics } from "src/application/entities/IPlaylistMusics"
 
 // Create
 type CreateParams = {
@@ -48,6 +49,17 @@ type FindByArtistIdParams = {
     artistId: string
 }
 
+// Add PlaylistMusics References
+
+type AddPlaylistMusicsParams = {
+    playlistId: string
+    musicId: string
+}
+
+type AddPlaylistMusicsResponse = IPlaylistMusics | null
+
+
+
 type FindByArtistIdResponse = IPlaylists | null
 
 
@@ -59,7 +71,7 @@ interface PlaylistsRepository {
     update(params: UpdateParams): Promise<UpdateResponse>
     delete(params: DeleteParams): Promise<IPlaylists>
     findByArtistId(params: FindByArtistIdParams): Promise<FindByArtistIdResponse>
-
+    addPlaylistMusics(params: AddPlaylistMusicsParams): Promise<AddPlaylistMusicsResponse>
 
 }
 
@@ -75,6 +87,8 @@ export {
     UpdateResponse,
     DeleteParams,
     FindByArtistIdParams,
-    FindByArtistIdResponse
+    FindByArtistIdResponse,
+    AddPlaylistMusicsParams,
+    AddPlaylistMusicsResponse
 }
 

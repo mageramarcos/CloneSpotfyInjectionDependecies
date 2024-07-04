@@ -72,6 +72,14 @@ class CreatePlaylist implements IUseCase<T, K> {
                 message = `The following music IDs do not exist and were not added: ${invalidMusicIds.join(', ')}.`
             }
 
+            for (const musicId of validMusicIds) {
+                await this.playlistsRepository.addPlaylistMusics({
+                    musicId,
+                    playlistId: createPlaylist.id
+                });
+            }
+
+
             return normalizationResponse.ok({ playlist: createPlaylist, message })
         } catch (error) {
             return normalizationResponse.serverError(error.message)

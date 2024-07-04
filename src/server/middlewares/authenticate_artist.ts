@@ -5,7 +5,7 @@ import { DrizzleArtistsRepository } from 'src/application/repository/implementat
 
 
 interface FindUniqueParams {
-    id: string;
+    id: string
 }
 
 const authenticate = async (
@@ -33,9 +33,9 @@ const authenticate = async (
                 req.body = {
                     ...req.body,
                     artistId: decoded.user_id
-                };
+                }
             } else {
-                req.body = { artistId: decoded.user_id };
+                req.body = { artistId: decoded.user_id }
             }
 
             return Promise.resolve()
@@ -47,6 +47,6 @@ const authenticate = async (
     }
 
     return Promise.reject(reply.status(401).send(normalizationResponse.unauthorized()))
-};
+}
 
 export { authenticate }

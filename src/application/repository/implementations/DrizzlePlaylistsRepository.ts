@@ -1,7 +1,7 @@
 import { drizzleClient } from 'src/db/drizzle'
-import { Playlists } from 'src/db/schema';
+import { Playlists, PlaylistMusics } from 'src/db/schema';
 import { IPlaylists } from 'src/application/entities/IPlaylists';
-import { CreateParams, CreateResponse, PlaylistsRepository, FindManyParams, FindManyResponse, FindUniqueParams, FindUniqueResponse, UpdateParams, UpdateResponse, DeleteParams, FindByArtistIdParams, FindByArtistIdResponse } from "../playlists/PlaylistsRepository";
+import { CreateParams, CreateResponse, PlaylistsRepository, FindManyParams, FindManyResponse, FindUniqueParams, FindUniqueResponse, UpdateParams, UpdateResponse, DeleteParams, FindByArtistIdParams, FindByArtistIdResponse, AddPlaylistMusicsParams, AddPlaylistMusicsResponse } from "../playlists/PlaylistsRepository";
 import { eq } from 'drizzle-orm'
 
 
@@ -70,6 +70,20 @@ class DrizzlePlaylistsRepository implements PlaylistsRepository {
             .where(eq(Playlists.artistId, artistId))
             .then(([playlists]) => playlists)
     }
+
+    async addPlaylistMusics({ musicId, playlistId }: AddPlaylistMusicsParams): Promise<AddPlaylistMusicsResponse> {
+
+
+        return await drizzleClient
+            .insert(PlaylistMusics)
+            .values({
+                playlistId,
+                musicId
+            })
+            .returning()
+            .then(([playlistMusics]) => playlistMusics)
+    }
+
 
 
 }
