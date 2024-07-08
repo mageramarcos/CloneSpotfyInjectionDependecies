@@ -30,7 +30,6 @@ class DrizzlePlaylistsRepository implements PlaylistsRepository {
 
     async findUnique({ id }: FindUniqueParams): Promise<FindUniqueResponse> {
 
-
         return await drizzleClient
             .query.Playlists.findFirst({
                 where: eq(Playlists.id, id),
@@ -94,7 +93,6 @@ class DrizzlePlaylistsRepository implements PlaylistsRepository {
     }
 
     async addPlaylistMusics({ musicId, playlistId }: AddPlaylistMusicsParams): Promise<AddPlaylistMusicsResponse> {
-
 
         return await drizzleClient
             .insert(PlaylistMusics)

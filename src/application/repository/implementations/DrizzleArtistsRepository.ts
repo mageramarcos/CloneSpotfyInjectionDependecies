@@ -28,8 +28,6 @@ class DrizzleArtistsRepository implements ArtistsRepository {
         return await drizzleClient
             .select()
             .from(Artists)
-
-
     }
 
     async findUnique({ id }: FindUniqueParams): Promise<FindUniqueResponse> {
@@ -58,7 +56,6 @@ class DrizzleArtistsRepository implements ArtistsRepository {
             .where(eq(Artists.id, id))
             .returning()
             .then(([artists]) => artists)
-
     }
 
     async findByEmail({ email }: FindByEmailParams): Promise<FindByEmailResponse> {
