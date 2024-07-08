@@ -38,7 +38,7 @@ class DrizzlePlaylistsRepository implements PlaylistsRepository {
                     artist: {
                         columns: {
                             name: true,
-                            id: true
+                            email: true
                         }
                     },
                     musics: {
