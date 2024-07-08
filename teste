@@ -1,0 +1,33 @@
+{
+    id:
+    name:
+    description:
+    musics: [
+        {
+            id:
+            name:
+            description:
+        }
+    ],
+    artist: {
+        id:
+        name:
+        description:
+    }
+}
+
+
+ return await drizzleClient
+            .query.Playlists.findFirst({
+                where: eq(Playlists.id, id),
+                with: {
+                    musics: true 
+                    
+                    # // musics: true
+                    # //     with: {
+                    # //         music: true,
+                    # //         playlist: true
+                    # //     }
+                    # // }
+                }
+            }) || null

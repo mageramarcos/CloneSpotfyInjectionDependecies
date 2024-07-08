@@ -2,7 +2,6 @@ import { pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 import { createId } from '@paralleldrive/cuid2';
 import { Artists } from './artists';
 import { relations } from 'drizzle-orm';
-import { PlaylistMusics } from './playlistMusics';
 
 export const Musics = pgTable('musics', {
     id: text('id').primaryKey().$defaultFn(() => createId()),
@@ -13,11 +12,9 @@ export const Musics = pgTable('musics', {
     updatedAt: timestamp('updated_at').defaultNow().$onUpdate(() => new Date()).notNull()
 });
 
-export const musicRelations = relations(Musics, ({ many }) => ({
-    artists: many(Artists, {
-        relationName: 'artists',
-    }),
-    playlists: many(PlaylistMusics, {
-        relationName: 'playlists',
+export const musicRelations = relations(Musics, ({ one }) => ({
+    artist: one(Artists, {
+        fields: [Musics.artistId],
+        references: [Artists.id]
     })
 }));

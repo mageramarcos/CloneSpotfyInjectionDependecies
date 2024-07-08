@@ -15,8 +15,7 @@ class DrizzlePlaylistsRepository implements PlaylistsRepository {
             .values({
                 title,
                 description,
-                artistId,
-                musicIds
+                artistId
             })
             .returning()
             .then(([playlists]) => playlists)
@@ -25,19 +24,43 @@ class DrizzlePlaylistsRepository implements PlaylistsRepository {
     async findMany({ }: FindManyParams): Promise<FindManyResponse> {
 
         return await drizzleClient
-            .select()
-            .from(Playlists)
+            .query.Playlists.findMany()
+
     }
 
     async findUnique({ id }: FindUniqueParams): Promise<FindUniqueResponse> {
+
+
         return await drizzleClient
-            .select()
-            .from(Playlists)
-            .where(eq(Playlists.id, id))
-            .innerJoin(Artists, eq(Playlists.artistId, Artists.id))
-            .innerJoin(PlaylistMusics, eq(Playlists.id, PlaylistMusics.playlistId))
-            .innerJoin(Musics, eq(PlaylistMusics.musicId, Musics.id))
-            .then(([playlistMusic]) => ({ playlistMusic }));
+            .query.Playlists.findFirst({
+                where: eq(Playlists.id, id),
+                with: {
+                    artist: {
+                        columns: {
+                            name: true,
+                            id: true
+                        }
+                    },
+                    musics: {
+                        with: {
+                            music: {
+                                columns: {
+                                    title: true,
+                                    description: true
+                                },
+                                with: {
+                                    artist: {
+                                        columns: {
+                                            name: true,
+                                            id: true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }) || null
     }
 
     async update({ id, data }: UpdateParams): Promise<UpdateResponse> {

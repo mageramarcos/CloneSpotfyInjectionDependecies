@@ -3,7 +3,7 @@ interface IPlaylists {
     title: string
     description: string
     artistId: string
-    musicIds: string[]
+    musicIds?: string[]
     createdAt?: Date
     updatedAt?: Date
 }

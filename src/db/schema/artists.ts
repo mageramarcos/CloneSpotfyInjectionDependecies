@@ -15,5 +15,6 @@ export const Artists = pgTable('artists', {
 
 export const artistRelations = relations(Artists, ({ many }) => ({
     musics: many(Musics),
-    playlists: many(Playlists)
+    playlists: many(Playlists),
+
 }));

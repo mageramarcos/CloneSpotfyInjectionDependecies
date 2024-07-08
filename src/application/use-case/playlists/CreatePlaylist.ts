@@ -63,7 +63,7 @@ class CreatePlaylist implements IUseCase<T, K> {
                     title,
                     description,
                     artistId,
-                    musicIds: validMusicIds
+                    // musicIds: validMusicIds
                 }
             })
 

@@ -22,7 +22,7 @@ type FindUniqueParams = {
     id: string,
 }
 
-type FindUniqueResponse = IPlaylists | null | {}
+type FindUniqueResponse = IPlaylists | null
 
 // Update
 type UpdateParams = {
